@@ -5,6 +5,9 @@ from youtube_search import YoutubeSearch as yts
 
 
 def yt_return_first_result(track_artist_name):
+    if track_artist_name == None:
+        print("An error has occured. track_artist_name was none")
+        quit(1)
     yts_results = yts(str(track_artist_name), max_results=10).to_dict()
     videoLink = "https://www.youtube.com" + yts_results[0]["link"]
     return videoLink
