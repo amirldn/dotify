@@ -1,20 +1,16 @@
-from youtube_search import YoutubeSearch  as yts
+from spotifyHandle import pull_track_artistSpot
+from youtubeHandle import yt_return_first_result, ytDl_and_convert
 
-from spotifyHandle import pull_track_artist
-
-#Return track name and track artist(s) from spotify link
+# Return track name and track artist(s) from spotify link
 
 user_SpotifyURI = input("Enter a Spotify URI: ")
 if user_SpotifyURI == "i":
     user_SpotifyURI = "spotify:track:64T3mDRHqtchar88NZ4Bnf"
 
-currentTrack = pull_track_artist(user_SpotifyURI)
-print(currentTrack)
+currentTrackName = pull_track_artistSpot(user_SpotifyURI)
+print(currentTrackName)
 
-yts_results = yts(str(currentTrack), max_results=10).to_dict()
-print(yts_results)
+current_YT_link = yt_return_first_result(currentTrackName)
+ytDl_and_convert(current_YT_link)
 
-#Take first result
-print(type(yts_results))
-videoLink =  ('https://www.youtube.com' + yts_results[0]['link'])
-print(videoLink)
+

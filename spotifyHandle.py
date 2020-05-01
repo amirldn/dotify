@@ -6,7 +6,8 @@ from api_keys import *
 client_credentials_manager = SpotifyClientCredentials(client_id, client_secret)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
-def pull_track_artist(spotify_URI):
+
+def pull_track_artistSpot(spotify_URI):
     """Provide a Spotify link as string
     and return the Track - Artist Name"""
 
@@ -14,8 +15,11 @@ def pull_track_artist(spotify_URI):
         track_info = sp.track(spotify_URI)
         # For more than 1 artist, get the first two artists
         if len(track_info.get("artists")) > 1:
-            track_artist = str(track_info.get("artists")[0].get("name")) + " " + str(
-                track_info.get("artists")[1].get("name"))
+            track_artist = (
+                str(track_info.get("artists")[0].get("name"))
+                + " "
+                + str(track_info.get("artists")[1].get("name"))
+            )
         else:
             # Single artist
             track_artist = track_info.get("artists")[0].get("name")
@@ -34,4 +38,3 @@ def pull_track_artist(spotify_URI):
     except:
         print("An error occurred as follows; ")
         return None
-
