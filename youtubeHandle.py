@@ -9,16 +9,19 @@ def yt_return_first_result(track_artist_name):
     videoLink = "https://www.youtube.com" + yts_results[0]["link"]
     return videoLink
 
+
 def ytDl_and_convert(link):
-     # Maybe make it download all at once first and then convert them for speed
+    # Maybe make it download all at once first and then convert them for speed
     ydl_opts = {
-        'format': 'bestaudio/best',
-        'postprocessors': [{
-            'key': 'FFmpegExtractAudio',
-            'preferredcodec': 'mp3',
-            'preferredquality': '192',
-        }],
+        "format": "bestaudio/best",
+        "nocheckcertificate": True,
+        "postprocessors": [
+            {
+                "key": "FFmpegExtractAudio",
+                "preferredcodec": "mp3",
+                "preferredquality": "328"
+            }
+        ],
     }
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         ydl.download([link])
-
