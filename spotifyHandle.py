@@ -7,18 +7,18 @@ client_credentials_manager = SpotifyClientCredentials(client_id, client_secret)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 
-def pull_track_artistSpot(spotify_URI):
+def pull_track_artist_spotify(spotify_uri):
     """Provide a Spotify link as string
     and return the Track - Artist Name"""
 
     try:
-        track_info = sp.track(spotify_URI)
+        track_info = sp.track(spotify_uri)
         # For more than 1 artist, get the first two artists
         if len(track_info.get("artists")) > 1:
             track_artist = (
-                str(track_info.get("artists")[0].get("name"))
-                + " "
-                + str(track_info.get("artists")[1].get("name"))
+                    str(track_info.get("artists")[0].get("name"))
+                    + " "
+                    + str(track_info.get("artists")[1].get("name"))
             )
         else:
             # Single artist
