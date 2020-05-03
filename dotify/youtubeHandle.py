@@ -19,11 +19,16 @@ def yt_return_first_result(track_artist_name):
 
 
 
-def yt_dl_then_convert(link):
+def yt_dl_then_convert(link, dir=None):
     # Maybe make it download all at once first and then convert them for speed
+    playlist_name='songs'
+    if dir is not None:
+        playlist_name=dir
     ydl_opts = {
         "format": "bestaudio/best",
         "nocheckcertificate": True,
+        "cachedir": "./temp",
+        'outtmpl': './'+playlist_name+'/%(title)s.%(ext)s',
         "postprocessors": [
             {
                 "key": "FFmpegExtractAudio",

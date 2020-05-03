@@ -1,5 +1,6 @@
 import re
 
+from dotify.fileHandle import *
 from dotify.spotifyHandle import *
 from dotify.youtubeHandle import *
 
@@ -26,7 +27,6 @@ def start():
         if user_songInput == "p":
             user_songInput = "spotify:playlist:6Zun9zueSjc3OMcJu15nbV"
         playlist_info = pull_playlist_info(user_songInput)
-        print(pull_playlist_name_spotify(playlist_info))
         print_playlist_songs_spotify(playlist_info)
         for song in pull_playlist_songs_list_spotify(playlist_info):
             link = yt_return_first_result(song)
@@ -34,8 +34,14 @@ def start():
                 yt_links.append(link)
             else:
                 yt_failed_tracks.append(song)
+        print("Searching for the songs")
         print(yt_links)
         print(yt_failed_tracks)
+        print("Downloading the songs")
+        makefolder(pull_playlist_name_spotify(playlist_info))
+        for yt_song_link in yt_links:
+            yt_dl_then_convert(yt_song_link, pull_playlist_name_spotify(playlist_info))
+
 
     elif user_songInput == "q":
         return "quit"
@@ -50,6 +56,6 @@ while True:
     if start() == "quit":
         break
 
-
+print("\n")
 print("Thank you for using dotify!")
 print("https://github.com/amirmaula/dotify")
