@@ -1,7 +1,7 @@
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 
-from api_keys import *
+from dotify.api_keys import *
 
 client_credentials_manager = SpotifyClientCredentials(client_id, client_secret)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
@@ -60,6 +60,8 @@ def pull_playlist_songs_list_spotify(spotify_playlist_sp):
 
 
 def print_playlist_songs_spotify(spotify_playlist_sp):
+    print("   %s %32.32s %s" %
+         ("*", spotify_playlist_sp.get("name"), spotify_playlist_sp.get("owner").get("display_name")))
     for i, item in enumerate(spotify_playlist_sp['tracks']['items']):
         track = item['track']
         print(
